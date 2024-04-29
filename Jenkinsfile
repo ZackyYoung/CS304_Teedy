@@ -7,13 +7,19 @@ pipeline {
             }
         }
         stage('Test') {
-            bat 'mvn test --fail-never'
+            steps {
+                bat 'mvn test --fail-never'
+            }
         }
         stage('sure-fire') {
-            bat 'mvn surefire-report:report'
+            steps {
+                bat 'mvn surefire-report:report'
+            }
         }
         stage('javadoc') {
-            bat 'mvn javadoc:jar'
+            steps {
+                bat 'mvn javadoc:jar'
+            }
         }
     }
 
