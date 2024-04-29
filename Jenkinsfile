@@ -6,19 +6,19 @@ pipeline {
                 bat 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Test') {
+        stage('pmd') {
             steps {
-                bat 'mvn test --fail-never'
-            }
-        }
-        stage('sure-fire') {
-            steps {
-                bat 'mvn surefire-report:report'
+                bat 'mvn pmd:pmd'
             }
         }
         stage('javadoc') {
             steps {
                 bat 'mvn javadoc:jar'
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'mvn test --fail-never'
             }
         }
     }
