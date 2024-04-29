@@ -13,7 +13,7 @@ pipeline {
         }
         stage('javadoc') {
             steps {
-                bat 'mvn javadoc:jar'
+                bat 'mvn javadoc:javadoc'
             }
         }
         stage('Test') {
