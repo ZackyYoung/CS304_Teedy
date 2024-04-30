@@ -81,7 +81,25 @@
       </snapshots>
     </repository>
   </repositories>
-
+  <profiles>
+    <profile>
+      <id>doclint-java8-disable</id>
+      <activation>
+        <jdk>[1.8,)</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <doclint>none</doclint>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
   <build>
     <plugins>
       <plugin>
@@ -567,6 +585,7 @@
 
     </dependencies>
   </dependencyManagement>
+
   <reporting>
     <plugins>
       <plugin>
@@ -588,19 +607,8 @@
             </reports>
           </reportSet>
         </reportSets>
-
       </plugin>
     </plugins>
   </reporting>
-  <profiles>
-    <profile>
-      <id>disable-javadoc-doclint</id>
-      <activation>
-        <jdk>[1.8,)</jdk>
-      </activation>
-      <properties>
-        <additionalparam>-Xdoclint:none</additionalparam>
-      </properties>
-    </profile>
-  </profiles>
+
 </project>
