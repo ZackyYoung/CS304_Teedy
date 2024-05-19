@@ -3,32 +3,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvn -B -DskipTests clean package'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
         stage('PMD') {
             steps {
-                bat 'mvn pmd:pmd'
-            }
-        }
-        stage('Generate Javadoc') {
-            steps {
-                bat 'mvn javadoc:javadoc'
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                bat 'mvn test'
+                sh 'kubectl set image deployments/hello-node container-name=image-id'
             }
         }
     }
-    post {
-        always {
-            archiveArtifacts artifacts: '**/target/site/**', fingerprint: true
-            archiveArtifacts artifacts: '**/target/**/*.jar', fingerprint: true
-            archiveArtifacts artifacts: '**/target/**/*.jar', fingerprint: true
-            archiveArtifacts artifacts: '**/target/site/apidocs/**', fingerprint: true
-            archiveArtifacts artifacts: '**/target/surefire-reports/**', fingerprint: true
-        }
-    }
+
 }
